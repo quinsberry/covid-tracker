@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { connect } from 'react-redux'
 
-function App() {
+import { Cards, Chart, CountryPicker } from './components'
+import { initializeApp, SelectCountry } from './redux/reducers/dataReducer'
+
+import styles from './App.module.scss'
+import virusImage from './assets/image.png'
+
+const App = ({ data, dailyData, countries, selectedCountry, loading, initializeApp, SelectCountry }) => {
+
+  React.useEffect(() => {
+    initializeApp()
+  }, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+      <img className={styles.image} src={virusImage} alt="COVID-19" />
+      <Cards data={data} loading={loading} />
+      <CountryPicker countries={countries} SelectCountry={SelectCountry} />
+      <Chart dailyData={dailyData} data={data} selectedCountry={selectedCountry} />
     </div>
-  );
+  )
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    data: state.global.data,
+    dailyData: state.global.dailyData,
+    countries: state.global.countries,
+    selectedCountry: state.global.selectedCountry,
+    loading: state.global.loading
+  }
+}
+
+export default connect(mapStateToProps, {
+  initializeApp,
+  SelectCountry
+})(App)
