@@ -14,19 +14,19 @@ const Cards = ({ data, loading }) => {
       title: 'Confirmed',
       numbers: confirmed ? confirmed.value : null,
       date: lastUpdate ? new Date(lastUpdate).toDateString() : null,
-      description: 'Number of confirmed cases of SARS CoV 2'
+      description: 'Number of confirmed cases of COVID-19'
     },
     {
       title: 'Recovered',
       numbers: recovered ? recovered.value : null,
       date: lastUpdate ? new Date(lastUpdate).toDateString() : null,
-      description: 'Number of recovered cases of SARS CoV 2'
+      description: 'Number of recovered cases of COVID-19'
     },
     {
       title: 'Deaths',
       numbers: deaths ? deaths.value : null,
       date: lastUpdate ? new Date(lastUpdate).toDateString() : null,
-      description: 'Number of deaths of SARS CoV 2'
+      description: 'Number of deaths of COVID-19'
     },
   ]
 
